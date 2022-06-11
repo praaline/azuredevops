@@ -15,6 +15,13 @@ terraform {
   }
 }
 
+# Get the image build tag variable from Azure pipeline
+variable "image_build_tag" {
+  type = string
+  description = "Latest build tag"
+}
+
+
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
@@ -38,7 +45,7 @@ resource "azurerm_container_group" "tfcg_test" {
 
     container {
         name    = "weatherapi"
-        image   = "praaline/weatherapi"
+        image   = "praaline/weatherapi:${var.image_build_tag}"
         cpu     = "1"
         memory  = "1"
         ports {
