@@ -5,6 +5,14 @@ terraform {
       version = "=3.0.0"
     }
   }
+
+  # Configure Terraform to persist terraform.tfstate into an Azure storage container
+  backend "azurerm" {
+    resource_group_name   = "tf_rg_blobstore"
+    storage_account_name  = "tfstoragepraaline"
+    container_name        = "tfstate"
+    key                   = "terraform.tfstate"    
+  }
 }
 
 # Configure the Microsoft Azure Provider
